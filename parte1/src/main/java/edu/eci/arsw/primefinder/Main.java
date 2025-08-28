@@ -1,4 +1,4 @@
-package edu.eci.arsw.primefinder;
+package parte1.src.main.java.edu.eci.arsw.primefinder;
 
 import java.util.ArrayList;
 import java.util.List;

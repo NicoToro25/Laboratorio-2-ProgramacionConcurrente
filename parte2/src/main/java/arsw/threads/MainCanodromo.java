@@ -1,4 +1,5 @@
-package arsw.threads;
+package parte2.src.main.java.arsw.threads;
+
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -38,8 +39,16 @@ public class MainCanodromo {
                                     galgos[i].start();
 
                                 }
+                                // Se añade un join() para esperar a que cada Galgo termine la carrera
+                                for (int i = 0; i < can.getNumCarriles(); i++) {
+                                    try {
+                                        galgos[i].join();
+                                    } catch (InterruptedException e1) {
+                                        e1.printStackTrace();
+                                    }
+                                }
                                
-				can.winnerDialog(reg.getGanador(),reg.getUltimaPosicionAlcanzada() - 1); 
+				                can.winnerDialog(reg.getGanador(),reg.getUltimaPosicionAlcanzada() - 1);
                                 System.out.println("El ganador fue:" + reg.getGanador());
                             }
                         }.start();
