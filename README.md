@@ -44,7 +44,12 @@ Taller.
 
     a.  La acción de iniciar la carrera y mostrar los resultados se realiza a partir de la línea 38 de MainCanodromo.
 
-    b.  Puede utilizarse el método join() de la clase Thread para sincronizar el hilo que inicia la carrera, con la finalización de los hilos de los galgos.
+    b.  Puede utilizarse el método `join()` de la clase Thread para sincronizar el hilo que inicia la carrera, con la finalización de los hilos de los galgos.
+
+    Se agrega un `join()` después de que se inicien los Threads con el propósito de sincronizar el hilo principal con la finalización de todos los hilos. Se implementó de la siguiente forma:
+
+    ![img](img/media/join.png)
+
 
 2.  Una vez corregido el problema inicial, corra la aplicación varias
     veces, e identifique las inconsistencias en los resultados de las
@@ -61,6 +66,10 @@ Taller.
 3.  Utilice un mecanismo de sincronización para garantizar que a dichas
     regiones críticas sólo acceda un hilo a la vez. Verifique los
     resultados.
+
+    Se añadió un mecanismo de sincronización para solucionar las secciones críticas dando como resultado una correcta asignación de valores de llegada.
+
+    ![img](img/media/synchronized.png)
 
 4.  Implemente las funcionalidades de pausa y continuar. Con estas,
     cuando se haga clic en ‘Stop’, todos los hilos de los galgos

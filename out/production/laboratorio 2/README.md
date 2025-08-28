@@ -1,10 +1,14 @@
-Escuela Colombiana de Ingeniería
+# Laboratorio #2
 
-Arquitecturas de Software – ARSW
+### Nicolas Toro y Juan José Díaz
 
-####Taller – programación concurrente, condiciones de carrera y sincronización de hilos. EJERCICIO INDIVIDUAL O EN PAREJAS.
+### Escuela Colombiana de Ingeniería
 
-#####Parte I – Antes de terminar la clase.
+### Arquitecturas de Software – ARSW
+
+## Taller – programación concurrente, condiciones de carrera y sincronización de hilos.
+
+**Parte I – Antes de terminar la clase.**
 
 Creación, puesta en marcha y coordinación de hilos.
 
@@ -14,9 +18,7 @@ Creación, puesta en marcha y coordinación de hilos.
 
 3. Lo que se le ha pedido es: debe modificar la aplicación de manera que cuando hayan transcurrido 5 segundos desde que se inició la ejecución, se detengan todos los hilos y se muestre el número de primos encontrados hasta el momento. Luego, se debe esperar a que el usuario presione ENTER para reanudar la ejecución de los mismo.
 
-
-
-#####Parte II 
+**Parte II** 
 
 
 Para este ejercicio se va a trabajar con un simulador de carreras de galgos (carpeta parte2), cuya representación gráfica corresponde a la siguiente figura:
@@ -42,7 +44,12 @@ Taller.
 
     a.  La acción de iniciar la carrera y mostrar los resultados se realiza a partir de la línea 38 de MainCanodromo.
 
-    b.  Puede utilizarse el método join() de la clase Thread para sincronizar el hilo que inicia la carrera, con la finalización de los hilos de los galgos.
+    b.  Puede utilizarse el método `join()` de la clase Thread para sincronizar el hilo que inicia la carrera, con la finalización de los hilos de los galgos.
+
+    Se agrega un `join()` después de que se inicien los Threads con el propósito de sincronizar el hilo principal con la finalización de todos los hilos. Se implementó de la siguiente forma:
+
+    ![img](img/media/join.png)
+
 
 2.  Una vez corregido el problema inicial, corra la aplicación varias
     veces, e identifique las inconsistencias en los resultados de las
@@ -50,6 +57,11 @@ Taller.
     podrían salir resultados válidos, pero en otros se pueden presentar
     dichas inconsistencias). A partir de esto, identifique las regiones
     críticas () del programa.
+
+    Se puede evidenciar que hay inconsistencias en las clases Galgo y RegistroLlegada, ya que dos o más Galgos (Threads) tienen acceso simultáneo a variables compartidas y por ende, modifican valores al mismo tiempo. Lo que genera inconsistencias como se puede evidenciar en la siguiente imagen, donde los Galgos 1 y 2 llegaron en primera posición.
+    Por eso es necesario sincronizar las secciones críticas para proteger las variables compartidas
+
+    ![img](img/media/inconsistencias.png)
 
 3.  Utilice un mecanismo de sincronización para garantizar que a dichas
     regiones críticas sólo acceda un hilo a la vez. Verifique los

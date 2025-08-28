@@ -39,7 +39,7 @@ public class MainCanodromo {
                                     galgos[i].start();
 
                                 }
-                                // Se añade un join() para esperar a que cada Galgo termine la carrera
+                                // Se añade un join() para sincronizar la llegada de los Galgos
                                 for (int i = 0; i < can.getNumCarriles(); i++) {
                                     try {
                                         galgos[i].join();
@@ -48,7 +48,7 @@ public class MainCanodromo {
                                     }
                                 }
                                
-				                can.winnerDialog(reg.getGanador(),reg.getUltimaPosicionAlcanzada() - 1);
+				                can.winnerDialog(reg.getGanador(),reg.getTotalGalgos());
                                 System.out.println("El ganador fue:" + reg.getGanador());
                             }
                         }.start();
