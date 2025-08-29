@@ -7,20 +7,28 @@ package parte2.src.main.java.arsw.threads;
  * 
  */
 public class Galgo extends Thread {
+	private final Pausador pausador;
 	private int paso;
 	private Carril carril;
 	RegistroLlegada regl;
 
-	public Galgo(Carril carril, String name, RegistroLlegada reg) {
+	private volatile boolean running = true; //BANDERA
+
+	public Galgo(Carril carril, String name, RegistroLlegada reg, Pausador pausador) {
 		super(name);
 		this.carril = carril;
 		paso = 0;
 		this.regl=reg;
+		this.pausador = pausador;
 	}
 
 	public void corra() throws InterruptedException {
-		while (paso < carril.size()) {			
+		while (paso < carril.size()) {
+
+			pausador.esperar();
+
 			Thread.sleep(100);
+
 			carril.setPasoOn(paso++);
 			carril.displayPasos(paso);
 			
@@ -46,6 +54,11 @@ public class Galgo extends Thread {
 			e.printStackTrace();
 		}
 
+	}
+
+	public void detener() {
+		running = false;
+		this.interrupt();
 	}
 
 }

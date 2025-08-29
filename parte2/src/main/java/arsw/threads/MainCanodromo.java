@@ -4,7 +4,7 @@ package parte2.src.main.java.arsw.threads;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
+import javax.swing.*;
 
 public class MainCanodromo {
 
@@ -13,6 +13,8 @@ public class MainCanodromo {
     private static Canodromo can;
 
     private static RegistroLlegada reg = new RegistroLlegada();
+
+    private static Pausador pausador = new Pausador();
 
     public static void main(String[] args) {
         can = new Canodromo(17, 100);
@@ -25,7 +27,7 @@ public class MainCanodromo {
 
                     @Override
                     public void actionPerformed(final ActionEvent e) {
-						//como acción, se crea un nuevo hilo que cree los hilos
+                        //como acción, se crea un nuevo hilo que cree los hilos
                         //'galgos', los pone a correr, y luego muestra los resultados.
                         //La acción del botón se realiza en un hilo aparte para evitar
                         //bloquear la interfaz gráfica.
@@ -34,7 +36,7 @@ public class MainCanodromo {
                             public void run() {
                                 for (int i = 0; i < can.getNumCarriles(); i++) {
                                     //crea los hilos 'galgos'
-                                    galgos[i] = new Galgo(can.getCarril(i), "" + i, reg);
+                                    galgos[i] = new Galgo(can.getCarril(i), "" + i, reg, pausador);
                                     //inicia los hilos
                                     galgos[i].start();
 
@@ -47,8 +49,8 @@ public class MainCanodromo {
                                         e1.printStackTrace();
                                     }
                                 }
-                               
-				                can.winnerDialog(reg.getGanador(),reg.getTotalGalgos());
+
+                                can.winnerDialog(reg.getGanador(), reg.getTotalGalgos());
                                 System.out.println("El ganador fue:" + reg.getGanador());
                             }
                         }.start();
@@ -61,6 +63,7 @@ public class MainCanodromo {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        pausador.pausar();
                         System.out.println("Carrera pausada!");
                     }
                 }
@@ -70,7 +73,32 @@ public class MainCanodromo {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        pausador.continuar();
                         System.out.println("Carrera reanudada!");
+                    }
+                }
+        );
+
+        can.setRestartAction(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        System.out.println("Carrera reiniciada!");
+
+                        if (galgos != null) {
+                            for (Galgo galgo : galgos) {
+                                if (galgo != null) {
+                                    galgo.detener();
+                                }
+                            }
+                        }
+
+                        can.restart();
+
+                        reg = new RegistroLlegada();
+                        galgos = new Galgo[can.getNumCarriles()];
+
+                        can.enableStart(true);
                     }
                 }
         );

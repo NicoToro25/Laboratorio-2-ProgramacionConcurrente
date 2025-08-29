@@ -67,10 +67,24 @@ Taller.
     regiones críticas sólo acceda un hilo a la vez. Verifique los
     resultados.
 
+    Se añadió un mecanismo de sincronización para solucionar las secciones críticas dando como resultado una correcta asignación de valores de llegada.
+
+    ![img](img/media/synchronized.png)
+
 4.  Implemente las funcionalidades de pausa y continuar. Con estas,
     cuando se haga clic en ‘Stop’, todos los hilos de los galgos
     deberían dormirse, y cuando se haga clic en ‘Continue’ los mismos
     deberían despertarse y continuar con la carrera. Diseñe una solución que permita hacer esto utilizando los mecanismos de sincronización con las primitivas de los Locks provistos por el lenguaje (wait y notifyAll).
+
+    Con el propósito de respetar el principio de single responsibility, se agregó una clase llamada Pausador, cuya
+principal funcionalidad es ser un *monitor compartido* que permite coordinar todos los hilos (Galgos).
+
+#### Bono
+
+5. Además de los requisitos funcionales pedidos en la parte 2 del laboratorio, se implementó una nueva funcionalidad que permite reiniciar
+la carrera sin necesidad de cerrar la aplicación. Se añadieron métodos y se completaron muchos otros donde se vieron
+modificadas las clases MainCanodronomo, Canodromo, Galgos y Carriles. Esta funcionalidad permitió explorar la palabra clave
+volatile, reflejando su importancia y la solución ante un problema de visibilidad y consistencia de memoria.
 
 
 ## Criterios de evaluación
