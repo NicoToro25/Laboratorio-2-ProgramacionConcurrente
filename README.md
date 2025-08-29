@@ -131,9 +131,9 @@ En este caso, el programa utiliza únicamente un hilo, por lo que solo un núcle
 
 Adicionalmente, la presencia de otros procesos y aplicaciones en ejecución en el sistema puede generar actividad en los demás núcleos, haciendo menos evidente cuál es el núcleo utilizado por nuestro programa.
 
-![alt text](image-1.png)
+![alt text](/img/media/image-1.png)
 
-![screenshot](image.png)
+![screenshot](/img/media/image.png)
 
 Observamos que el programa tardaba mucho más de lo esperado y que los tiempos de ejecución variaban significativamente al cambiar el número de hilos. Analizando el comportamiento, identificamos que esto se debía a la impresión de todos los números primos encontrados en la consola, lo cual genera un cuello de botella considerable en la ejecución.
 
@@ -177,9 +177,9 @@ Tiempo total de ejecución: 8712 ms -> 0.1452 min
 2. Modifique el programa para que, en lugar de resolver el problema con un solo hilo, lo haga con tres, donde cada uno de éstos hará la tarcera parte del problema original. Verifique nuevamente el funcionamiento, y nuevamente revise el uso de los núcleos del equipo.
    
 
-![screenshot](image-3.png)
+![screenshot](/img/media/image-3.png)
 
-![screenshot](image-2.png)
+![screenshot](/img/media/image-2.png)
 
 Con impresión de números no cambia practicamente nada respecto a ejecutarlo con un solo hilo:
 
@@ -321,7 +321,7 @@ Con el propósito de respetar el principio de single responsibility, se agregó 
 
 El botón Stop es completamente funcional, los galgos paran hasta que se oprima el botón Continue como vemos en esta captura de pantalla:
 
-![alt text](image-4.png)
+![alt text](/img/media/image-4.png)
 
 Además en la terminal nos indica también que la carrera fue pausada:
 
